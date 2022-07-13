@@ -1,17 +1,17 @@
-import clsx from 'clsx';
-import React from 'react';
-import { twMerge } from 'tailwind-merge';
+import clsx from "clsx";
+import React from "react";
+import { twMerge } from "tailwind-merge";
 
-import type { ComponentSize, IComponentBaseProps } from '@/types';
+import type { ComponentSize, IComponentBaseProps } from "@/types";
 
-import type { CardActionsProps as ActionProps } from './CardActions';
-import CardActions from './CardActions';
-import type { CardBodyProps as BodyProps } from './CardBody';
-import CardBody from './CardBody';
-import type { CardImageProps as ImageProps } from './CardImage';
-import CardImage from './CardImage';
-import type { CardTitleProps as TitleProps } from './CardTitle';
-import CardTitle from './CardTitle';
+import type { CardActionsProps as ActionProps } from "./CardActions";
+import CardActions from "./CardActions";
+import type { CardBodyProps as BodyProps } from "./CardBody";
+import CardBody from "./CardBody";
+import type { CardImageProps as ImageProps } from "./CardImage";
+import CardImage from "./CardImage";
+import type { CardTitleProps as TitleProps } from "./CardTitle";
+import CardTitle from "./CardTitle";
 
 export type CardActionsProps = ActionProps;
 export type CardBodyProps = BodyProps;
@@ -37,25 +37,25 @@ interface ModifierMap {
 
 const DYNAMIC_MODIFIERS: ModifierMap = {
   compact: {
-    true: 'card-compact',
-    xs: 'xs:card-compact',
-    sm: 'sm:card-compact',
-    md: 'md:card-compact',
-    lg: 'lg:card-compact',
+    true: "card-compact",
+    xs: "xs:card-compact",
+    sm: "sm:card-compact",
+    md: "md:card-compact",
+    lg: "lg:card-compact",
   },
   normal: {
-    true: 'card-normal',
-    xs: 'xs:card-normal',
-    sm: 'sm:card-normal',
-    md: 'md:card-normal',
-    lg: 'lg:card-normal',
+    true: "card-normal",
+    xs: "xs:card-normal",
+    sm: "sm:card-normal",
+    md: "md:card-normal",
+    lg: "lg:card-normal",
   },
   side: {
-    true: 'card-side',
-    xs: 'xs:card-side',
-    sm: 'sm:card-side',
-    md: 'md:card-side',
-    lg: 'lg:card-side',
+    true: "card-side",
+    xs: "xs:card-side",
+    sm: "sm:card-side",
+    md: "md:card-side",
+    lg: "lg:card-side",
   },
 };
 
@@ -65,15 +65,18 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     ref
   ): JSX.Element => {
     const classes = twMerge(
-      'card',
+      "card",
       className,
       clsx({
-        'card-bordered': bordered,
-        'image-full': imageFull,
-        [(compact && DYNAMIC_MODIFIERS.compact[compact.toString()]) || '']:
+        "card-bordered": bordered,
+        "image-full": imageFull,
+        // @ts-ignore
+        [(compact && DYNAMIC_MODIFIERS.compact[compact.toString()]) || ""]:
           compact,
-        [(normal && DYNAMIC_MODIFIERS.normal[normal.toString()]) || '']: normal,
-        [(side && DYNAMIC_MODIFIERS.side[side.toString()]) || '']: side,
+        // @ts-ignore
+        [(normal && DYNAMIC_MODIFIERS.normal[normal.toString()]) || ""]: normal,
+        // @ts-ignore
+        [(side && DYNAMIC_MODIFIERS.side[side.toString()]) || ""]: side,
       })
     );
 

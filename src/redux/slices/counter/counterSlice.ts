@@ -1,17 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { todosSlice } from "@/redux/slices/todos";
 import { FeatureKey } from "./enumCounter";
 
 export const counterSlice = createSlice({
   name: FeatureKey.COUNTER,
   initialState: 0,
   reducers: {},
-  extraReducers: {
-    [todosSlice.actions.createTodoActionCreator.type]: (state) => state + 1,
-    [todosSlice.actions.editTodoActionCreator.type]: (state) => state + 1,
-    [todosSlice.actions.toggleTodoActionCreator.type]: (state) => state + 1,
-    [todosSlice.actions.removeTodoActionCreator.type]: (state) => state + 1,
-  },
+  extraReducers: {},
 });
 
 export const counterActions = {

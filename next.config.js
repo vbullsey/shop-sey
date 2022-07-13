@@ -1,14 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
 });
 
 module.exports = withBundleAnalyzer({
   eslint: {
-    dirs: ['.'],
+    dirs: ["."],
+    ignoreDuringBuilds: true,
   },
   poweredByHeader: false,
   trailingSlash: true,
-  basePath: '',
+  basePath: "",
   reactStrictMode: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 });

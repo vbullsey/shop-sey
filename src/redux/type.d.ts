@@ -3,3 +3,10 @@ export interface Todo {
   desc: string;
   isComplete: boolean;
 }
+
+export interface JsonTodo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}

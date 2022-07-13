@@ -1,25 +1,25 @@
-import clsx from 'clsx';
-import type { ReactElement, RefObject } from 'react';
+import clsx from "clsx";
+import type { ReactElement, RefObject } from "react";
 import React, {
   cloneElement,
   createRef,
   forwardRef,
   useEffect,
   useState,
-} from 'react';
-import { twMerge } from 'tailwind-merge';
+} from "react";
+import { twMerge } from "tailwind-merge";
 
-import type { IComponentBaseProps } from '@/types';
+import type { IComponentBaseProps } from "@/types";
 
-import Button from '../../Actions/Button';
-import type { CarouselItemProps, CarouselItemWidth } from './CarouselItem';
-import CarouselItem from './CarouselItem';
+import Button from "../../Actions/Button";
+import type { CarouselItemProps, CarouselItemWidth } from "./CarouselItem";
+import CarouselItem from "./CarouselItem";
 
 export type CarouselProps = React.HTMLAttributes<HTMLDivElement> &
   IComponentBaseProps & {
     children: ReactElement<CarouselItemProps>[];
-    display?: 'slider' | 'numbered' | 'sequential';
-    snap?: 'start' | 'center' | 'end';
+    display?: "slider" | "numbered" | "sequential";
+    snap?: "start" | "center" | "end";
     vertical?: boolean;
     width?: CarouselItemWidth;
     buttonStyle?: (value: string) => React.ReactElement;
@@ -29,7 +29,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
   (
     {
       children,
-      display = 'slider',
+      display = "slider",
       snap,
       vertical,
       width,
@@ -41,12 +41,12 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     ref
   ): JSX.Element => {
     const classes = twMerge(
-      'carousel',
+      "carousel",
       className,
       clsx({
         [`carousel-${snap}`]: snap,
-        'carousel-vertical': vertical,
-        'w-full': display !== 'slider',
+        "carousel-vertical": vertical,
+        "w-full": display !== "slider",
       })
     );
 
@@ -61,9 +61,10 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     }, [children]);
 
     const scrollToIndex = (index: number) => {
+      // @ts-ignore
       itemRefs[index].current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
+        behavior: "smooth",
+        block: "nearest",
         inline: snap,
       });
     };
@@ -85,8 +86,8 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               children: child.props.children,
               src: child.props.src,
               alt: child.props.alt,
-              width: display !== 'slider' ? 'full' : width,
-              hasButtons: display === 'sequential',
+              width: display !== "slider" ? "full" : width,
+              hasButtons: display === "sequential",
               buttonStyle,
               onPrev: () =>
                 scrollToIndex(i - 1 < 0 ? children.length - 1 : i - 1),
@@ -96,7 +97,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
             });
           })}
         </div>
-        {display === 'numbered' && (
+        {display === "numbered" && (
           <div className="flex w-full justify-center gap-2 py-2">
             {children.map((_, i) => {
               if (buttonStyle != null) {
