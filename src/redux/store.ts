@@ -38,5 +38,5 @@ const makeStore: MakeStore<RootState> = (context: Context): EnhancedStore =>
 
 // @ts-ignore
 export const wrapper = createWrapper(makeStore, {
-  debug: process.env.NODE_ENV !== `production`,
+  debug: process.env.NODE_ENV === `production`,
 });

@@ -13,6 +13,8 @@ export const useModal = () => {
     setVisible(!visible);
   };
 
+  const closeModal = () => setVisible(false);
+
   const RenderModal: React.FC<RenderModalProps> = ({ children }) => (
     <>
       <Modal open={visible} onClickBackdrop={toggleVisible}>
@@ -32,5 +34,6 @@ export const useModal = () => {
   return {
     RenderModal,
     toggleVisible,
+    closeModal,
   };
 };

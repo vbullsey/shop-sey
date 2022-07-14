@@ -1,4 +1,6 @@
 import Card from "@/components/Card/Card";
+import { NextPageContext } from "next";
+import { getSession } from "next-auth/react";
 
 const listProducts = [
   {
@@ -33,13 +35,11 @@ const Index = () => {
               <h2 className="text-3xl font-bold">Productos destacados</h2>
             </div>
             <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {listProducts.map((product, i) => {
-                return (
-                  <div key={i} className="flex flex-col ">
-                    <Card product={product} />
-                  </div>
-                );
-              })}
+              {listProducts.map((product, i) => (
+                <div key={i} className="flex flex-col ">
+                  <Card product={product} />
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -47,5 +47,12 @@ const Index = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+  return {
+    props: { session },
+  };
+}
 
 export default Index;

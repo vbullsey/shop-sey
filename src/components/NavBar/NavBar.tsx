@@ -1,4 +1,6 @@
 import { useModal } from "@/hooks/useModal";
+import Avatar from "@/ui/Data display/Avatar";
+import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
 import MainModal from "../Modals/MainModal";
 
@@ -15,7 +17,15 @@ export const itemsNav = [
 ];
 
 const NavBar = () => {
-  const { RenderModal, toggleVisible } = useModal();
+  const { data: session } = useSession();
+
+  const { RenderModal, toggleVisible, closeModal } = useModal();
+
+  const [value, setValue] = useState<number>(0);
+
+  const firstLetterSession = session?.user?.name
+    ? session.user.name.substring(0, 2)
+    : "X";
 
   return (
     <>
@@ -64,14 +74,48 @@ const NavBar = () => {
             })}
           </ul>
         </div>
-        <div className="navbar-end">
-          <button onClick={toggleVisible} className="btn btn-sm btn-primary">
-            Iniciar Sesión
-          </button>
+        <div className="navbar-end gap-2">
+          {session ? (
+            <>
+              <Avatar
+                className="uppercase"
+                shape="circle"
+                size="xs"
+                letters={firstLetterSession}
+              />
+              <button
+                onClick={() => signOut()}
+                className="btn btn-sm btn-primary "
+              >
+                Cerrar Sesión
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => {
+                  toggleVisible();
+                  setValue(0);
+                }}
+                className="btn btn-sm "
+              >
+                Iniciar Sesión
+              </button>
+              <button
+                onClick={() => {
+                  toggleVisible();
+                  setValue(1);
+                }}
+                className="btn btn-sm btn-primary"
+              >
+                Registrarse
+              </button>
+            </>
+          )}
         </div>
       </div>
       <RenderModal>
-        <MainModal />
+        <MainModal value={value} setValue={setValue} closeModal={closeModal} />
       </RenderModal>
     </>
   );

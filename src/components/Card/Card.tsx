@@ -1,3 +1,5 @@
+import Rating from "@/ui/Data input/Rating";
+
 type CardProps = {
   product: {
     title: string;
@@ -16,10 +18,24 @@ const Card: React.FC<CardProps> = ({ product }) => {
         src={url}
       />
 
-      <div className="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
-        <h3 className="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
+      <div className="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 ">
+        <h3 className="font-bold tracking-wide text-center text-gray-800 uppercase ">
           {title}
         </h3>
+
+        <div className="pb-2  flex justify-center">
+          <Rating>
+            {[...Array.from(Array(5).keys())].map((num, i) => (
+              <Rating.Item
+                disabled
+                key={i}
+                name="rating-2"
+                className={`mask mask-star-2  ${num === 4 ? "" : "bg-primary"}`}
+                defaultChecked={num === 4 ? false : true}
+              />
+            ))}
+          </Rating>
+        </div>
 
         <div className="flex items-center justify-between px-3 py-2 bg-gray-200 dark:bg-gray-700">
           <span className="font-bold text-gray-800 dark:text-gray-200">
