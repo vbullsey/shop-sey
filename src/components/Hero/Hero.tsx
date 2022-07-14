@@ -1,6 +1,21 @@
 import Carousel from "@/ui/Data display/Carousel";
 import React from "react";
 
+const carouselImages = [
+  {
+    src: "/akatsuki.png",
+    alt: "akatsuki",
+  },
+  {
+    src: "/akatsuki.png",
+    alt: "akatsuki",
+  },
+  {
+    src: "/akatsuki.png",
+    alt: "akatsuki",
+  },
+];
+
 const Hero = () => {
   return (
     <div>
@@ -10,9 +25,9 @@ const Hero = () => {
           width="full"
           className="h-[300px] md:h-full "
         >
-          <Carousel.Item src="/akatsuki.png" alt="akatsuki" />
-          <Carousel.Item src="/akatsuki.png" alt="akatsuki" />
-          <Carousel.Item src="/akatsuki.png" alt="akatsuki" />
+          {carouselImages.map((item, i) => (
+            <Carousel.Item key={i} src={item.src} alt={item.alt} />
+          ))}
         </Carousel>
       </div>
       <div className="p-4 py-8 bg-black">

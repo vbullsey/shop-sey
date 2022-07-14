@@ -1,16 +1,11 @@
-import clsx from 'clsx';
-import React, { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
-
-import type {
-  ComponentColor,
-  ComponentSize,
-  IComponentBaseProps,
-} from '../types';
+import { ComponentColor, ComponentSize, IComponentBaseProps } from "@/types";
+import clsx from "clsx";
+import React, { forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 export type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  'size' | 'color'
+  "size" | "color"
 > &
   IComponentBaseProps & {
     bordered?: boolean;
@@ -36,13 +31,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ref
   ): JSX.Element => {
     const classes = twMerge(
-      'input',
+      "input",
       className,
       clsx({
         [`input-${size}`]: size,
         [`input-${color}`]: color,
         [`focus:outline-offset-0`]: !borderOffset,
-        'input-bordered': bordered,
+        "input-bordered": bordered,
       })
     );
 
@@ -60,6 +55,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-Input.displayName = 'Input';
+Input.displayName = "Input";
 
 export default Input;

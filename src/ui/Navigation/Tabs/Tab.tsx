@@ -1,18 +1,18 @@
-import clsx from 'clsx';
-import React from 'react';
-import { twMerge } from 'tailwind-merge';
+import clsx from "clsx";
+import React from "react";
+import { twMerge } from "tailwind-merge";
 
-import type { ComponentSize } from '@/types';
+import type { ComponentSize } from "@/types";
 
 export type TabProps<T> = Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  'onClick'
+  "onClick"
 > & {
   value: T;
   activeValue?: T;
   onClick?: (value: T) => void;
   size?: ComponentSize;
-  variant?: 'bordered' | 'lifted';
+  variant?: "bordered" | "lifted";
 };
 
 const TabInner = <T extends string | number | undefined>(
@@ -30,10 +30,10 @@ const TabInner = <T extends string | number | undefined>(
   ref?: React.ForwardedRef<T>
 ): JSX.Element => {
   const classes = twMerge(
-    'tab',
+    "tab",
     className,
     clsx({
-      'tab-active': value != null && value === activeValue,
+      "tab-active": value != null && value === activeValue,
       [`tab-${size}`]: size,
       [`tab-${variant}`]: variant,
     })
