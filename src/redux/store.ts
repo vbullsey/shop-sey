@@ -10,6 +10,7 @@ import {
 } from "@reduxjs/toolkit";
 import { Context, createWrapper, MakeStore } from "next-redux-wrapper";
 import logger from "redux-logger";
+import { cartSlice } from "./slices/cart";
 import { counterSlice } from "./slices/counter";
 
 export type ThunkActionType<T = Promise<void>> = ThunkAction<
@@ -28,6 +29,7 @@ export type AppDispatch = typeof store.dispatch;
 const store = configureStore({
   reducer: combineReducers({
     counter: counterSlice.reducer,
+    cart: cartSlice.reducer,
   }),
   middleware: [...getDefaultMiddleware(), logger],
   devTools: process.env.NODE_ENV !== `production`,

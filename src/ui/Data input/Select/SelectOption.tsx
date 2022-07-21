@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 export type SelectOptionProps<T> = Omit<
   React.OptionHTMLAttributes<HTMLOptionElement>,
-  'value'
+  "value"
 > & {
   selectedValue?: T;
   value: T;
 };
 
-const SelectOption = <T extends string | number | undefined>({
+const SelectOption = <T extends string | number | undefined | null>({
   selectedValue,
   value,
   children,

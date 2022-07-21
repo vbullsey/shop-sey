@@ -1,4 +1,7 @@
 import "../styles/global.css";
+import "slick-carousel/slick/slick.css";
+
+import "slick-carousel/slick/slick-theme.css";
 
 import type { AppProps } from "next/app";
 import { getSession, SessionProvider } from "next-auth/react";
@@ -20,6 +23,7 @@ const MyApp: React.FC<AppProps> = ({
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
+
   return {
     props: { session },
   };

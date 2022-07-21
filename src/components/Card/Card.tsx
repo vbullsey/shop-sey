@@ -1,7 +1,10 @@
+import { useActions } from "@/redux/hooks";
 import Rating from "@/ui/Data input/Rating";
+import Link from "next/link";
 
 type CardProps = {
   product: {
+    id: string;
     title: string;
     price: string;
     url: string;
@@ -9,7 +12,10 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ product }) => {
-  const { title = "", price = "", url = "" } = product;
+  const { id, title = "", price = "", url = "" } = product;
+  const { addToCart } = useActions();
+
+  const handleAddToCart = () => addToCart(product);
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm mx-auto">
@@ -19,9 +25,13 @@ const Card: React.FC<CardProps> = ({ product }) => {
       />
 
       <div className="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 ">
-        <h3 className="font-bold tracking-wide text-center text-gray-800 uppercase ">
-          {title}
-        </h3>
+        <Link href={`products/${id}`}>
+          <a>
+            <h3 className="font-bold tracking-wide text-center text-gray-800 uppercase ">
+              {title}
+            </h3>
+          </a>
+        </Link>
 
         <div className="pb-2  flex justify-center">
           <Rating>
@@ -41,7 +51,10 @@ const Card: React.FC<CardProps> = ({ product }) => {
           <span className="font-bold text-gray-800 dark:text-gray-200">
             {price}
           </span>
-          <button className="btn btn-xs btn-primary md:btn-sm gap-2">
+          <button
+            className="btn btn-xs btn-primary md:btn-sm gap-2"
+            onClick={handleAddToCart}
+          >
             Añadir al carro
             <svg
               xmlns="http://www.w3.org/2000/svg"

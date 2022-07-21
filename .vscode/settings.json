@@ -23,5 +23,9 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "files.exclude": {
+    "": true
+  },
+  "search.useIgnoreFiles": false
 }

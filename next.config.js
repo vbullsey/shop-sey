@@ -8,6 +8,9 @@ module.exports = withBundleAnalyzer({
     dirs: ["."],
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ["mediumrare.imgix.net", "images.unsplash.com"],
+  },
   poweredByHeader: false,
   trailingSlash: true,
   basePath: "",
