@@ -10,7 +10,7 @@ module.exports = {
       {
         shopsey: {
           primary: "#fc76ef",
-          secondary: "#06a316",
+          secondary: "#303030",
           accent: "#e053d4",
           neutral: "#212131",
           "base-100": "#323539",

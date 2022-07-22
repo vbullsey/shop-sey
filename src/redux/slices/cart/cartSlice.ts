@@ -38,6 +38,17 @@ export const cartSlice = createSlice({
         } else item.quantity--;
       }
     },
+    addToCartByQuantity: (state, action) => {
+      const { product, quantity } = action.payload;
+
+      const item = state.find((item) => item.id === product.id);
+
+      if (!item) {
+        state.push({ ...product, quantity });
+      } else {
+        item.quantity += quantity;
+      }
+    },
     removeFromCart: (state, action) => {
       const index = state.findIndex((item) => item.id === action.payload);
       state.splice(index, 1);

@@ -1,4 +1,5 @@
 import HomeSection from "@/components/Home/HomeSection";
+import MainLayout from "@/layout/MainLayout";
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 
@@ -13,9 +14,9 @@ export type ProductProps = {
   products: ProductInfoProps[];
 };
 
-const Index: React.FC<ProductProps> = ({ products }) => {
+const Index: React.FC<ProductProps> = ({ categories, products }) => {
   return (
-    <>
+    <MainLayout navBarData={categories}>
       <div className="mx-4">
         <div className="flex justify-center ml-2 flex-col">
           <section className="py-6 sm:py-12 dark:bg-gray-800 dark:text-gray-100">
@@ -23,17 +24,24 @@ const Index: React.FC<ProductProps> = ({ products }) => {
           </section>
         </div>
       </div>
-    </>
+    </MainLayout>
   );
 };
 
 export async function getServerSideProps(context: NextPageContext) {
   try {
     const session = await getSession(context);
-    const data = await fetch(`http://localhost:8000/user/products`);
-    const products = await data.json();
+    const productResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/products`
+    );
+    const categoriesResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/config/categories`
+    );
+
+    const products = await productResponse.json();
+    const categories = await categoriesResponse.json();
     return {
-      props: { session, products },
+      props: { session, categories, products },
     };
   } catch (e) {
     return {

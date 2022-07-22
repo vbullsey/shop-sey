@@ -4,18 +4,18 @@ import NavBar from "@/components/NavBar/NavBar";
 import { useRouter } from "next/router";
 import { Meta } from "./Meta";
 
-const MainLayout = ({ categories, children }: any) => {
+// https://stackoverflow.com/questions/70939164/next-js-pass-getserversideprops-and-children-props-in-the-page-component
+
+const MainLayout = ({ navBarData, children }: any) => {
   const { asPath } = useRouter();
 
-  console.log("categories", categories);
-
   return (
-    <div className="flex h-screen w-full overflow-x-hidden">
+    <div className="flex  h-screen w-full overflow-x-hidden">
       <Meta />
       <div className="flex flex-1 flex-col  ">
-        <NavBar categories={categories} />
+        <NavBar navBarData={navBarData} />
         {asPath === "/" && <Hero />}
-        <div className="p-1 bg-neutral">{children}</div>
+        <div className=" bg-neutral ">{children}</div>
         <Footer />
       </div>
     </div>

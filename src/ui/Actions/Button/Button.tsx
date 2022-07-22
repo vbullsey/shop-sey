@@ -1,24 +1,24 @@
-import clsx from 'clsx';
-import type { ReactNode } from 'react';
-import React, { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
+import clsx from "clsx";
+import type { ReactNode } from "react";
+import React, { forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 import type {
   ComponentColor,
   ComponentShape,
   ComponentSize,
   IComponentBaseProps,
-} from '@/types';
+} from "@/types";
 
 export type ButtonProps = Omit<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
-  'color'
+  "color"
 > &
   IComponentBaseProps & {
     href?: string;
     shape?: ComponentShape;
     size?: ComponentSize;
-    variant?: 'outline' | 'link';
+    variant?: "outline" | "link";
     color?: ComponentColor;
     fullWidth?: boolean;
     responsive?: boolean;
@@ -54,18 +54,18 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ): JSX.Element => {
     const classes = twMerge(
-      'btn',
+      "btn",
       className,
-      clsx(((startIcon && !loading) || endIcon) && 'gap-2', {
+      clsx(((startIcon && !loading) || endIcon) && "gap-2", {
         [`btn-${size}`]: size,
         [`btn-${shape}`]: shape,
         [`btn-${variant}`]: variant,
         [`btn-${color}`]: color,
-        'btn-block': fullWidth,
-        'btn-xs md:btn-sm lg:btn-md xl:btn-lg': responsive,
-        'no-animation': !animation,
-        'btn-active': active,
-        'btn-disabled': disabled,
+        "btn-block": fullWidth,
+        "btn-xs md:btn-sm lg:btn-md": responsive,
+        "no-animation": !animation,
+        "btn-active": active,
+        "btn-disabled": disabled,
         loading,
       })
     );
@@ -96,6 +96,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = 'Button';
+Button.displayName = "Button";
 
 export default Button;

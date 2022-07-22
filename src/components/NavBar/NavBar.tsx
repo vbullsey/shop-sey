@@ -11,7 +11,7 @@ import Indicator from "@/ui/Layout/Indicator";
 import Menu from "@/ui/Navigation/Menu";
 import Navbar from "@/ui/Navigation/Navbar";
 import { getItemsCount, getTotalPrice } from "@/utils/cartUtils";
-import { firstLetterSession, totalQuantityItems } from "@/utils/functionts";
+import { firstLetterSession } from "@/utils/functionts";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
@@ -47,14 +47,27 @@ export const itemsMenuUser = [
   },
 ];
 
-const NavBar = ({ categories }) => {
+const NavBar = ({ navBarData }) => {
   const { RenderModal, toggleVisible, closeModal } = useModal();
 
   const [value, setValue] = useState<number>(0);
 
+  const renderNavBarData = (
+    <>
+      {navBarData &&
+        navBarData.map((item, i) => {
+          return (
+            <li key={i}>
+              <a className="uppercase text-sm">{item.title}</a>
+            </li>
+          );
+        })}
+    </>
+  );
+
   return (
     <>
-      <Navbar className="bg-neutral border-b-2 border-primary">
+      <Navbar className="bg-black border-b-2 border-primary">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -77,14 +90,7 @@ const NavBar = ({ categories }) => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {categories &&
-                categories.map((item, i) => {
-                  return (
-                    <li key={i}>
-                      <a className="uppercase text-sm">{item.title}</a>
-                    </li>
-                  );
-                })}
+              {renderNavBarData}
             </ul>
           </div>
           <Link href="/">
@@ -92,15 +98,7 @@ const NavBar = ({ categories }) => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">
-            {itemsNav.map((item, i) => {
-              return (
-                <li key={i}>
-                  <a className="uppercase text-sm">{item.title}</a>
-                </li>
-              );
-            })}
-          </ul>
+          <ul className="menu menu-horizontal p-0">{renderNavBarData}</ul>
         </div>
         <RightNavbar toggleVisible={toggleVisible} setValue={setValue} />
       </Navbar>
@@ -138,7 +136,7 @@ const RightNavbar: React.FC<RigthNavbarProps> = ({
       <Dropdown>
         <Dropdown.Toggle>
           <Avatar
-            className="uppercase"
+            className="uppercase "
             shape="circle"
             size="xs"
             letters={session ? firstLetterSession(session) : "X"}
@@ -163,7 +161,7 @@ const RightNavbar: React.FC<RigthNavbarProps> = ({
       <div className="">
         <button
           onClick={() => signOut()}
-          className="btn btn-sm btn-primary hidden md:inline "
+          className="btn btn-sm btn-primary hidden text-white md:inline "
         >
           Cerrar Sesión
         </button>
@@ -251,9 +249,13 @@ const ShoppingCartNavBar = () => {
                 Subtotal: ${getTotalPrice(cart)}
               </span>
               <Card.Actions>
-                <Button color="primary" fullWidth>
-                  Ver Carrito
-                </Button>
+                <Link href="/cart">
+                  <a>
+                    <Button color="primary" fullWidth>
+                      Ver Carrito
+                    </Button>
+                  </a>
+                </Link>
               </Card.Actions>
             </>
           )}

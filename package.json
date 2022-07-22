@@ -1,6 +1,6 @@
 {
   "name": "shop-sey",
-  "version": "0.11",
+  "version": "0.1.4",
   "description": "ShopSey 2022 built with Nextjs, Tailwind, DaisyUI",
   "repository": {
     "type": "git",
