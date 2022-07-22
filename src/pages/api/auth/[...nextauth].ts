@@ -34,7 +34,7 @@ export default NextAuth({
         maxAge: 30 * 24 * 60 * 60,
       },
       async authorize(credentials, req) {
-        const url = `${process.env.BACKEND_URL}/user/signin`;
+        const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/signin`;
         const token = await fetch(url, {
           method: "POST",
           mode: "cors",
