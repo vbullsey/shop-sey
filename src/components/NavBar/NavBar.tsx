@@ -15,7 +15,7 @@ import { firstLetterSession } from "@/utils/functionts";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
-import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaSearch, FaPowerOff } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 
 import MainModal from "../Modals/MainModal";
@@ -45,6 +45,11 @@ export const itemsMenuUser = [
     title: "Pedidos",
     icon: <FaShoppingCart />,
   },
+  {
+    title: "Cerrar Sesión",
+    icon: <FaPowerOff />,
+    onClick: () => signOut(),
+  },
 ];
 
 const NavBar = ({ navBarData }) => {
@@ -58,7 +63,9 @@ const NavBar = ({ navBarData }) => {
         navBarData.map((item, i) => {
           return (
             <li key={i}>
-              <a className="uppercase text-sm">{item.title}</a>
+              <Link href={`/products${item.url}`}>
+                <a className="uppercase text-sm">{item.title}</a>
+              </Link>
             </li>
           );
         })}
@@ -97,8 +104,8 @@ const NavBar = ({ navBarData }) => {
             <a className="btn btn-ghost normal-case text-xl">ShopSey</a>
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">{renderNavBarData}</ul>
+        <div className="navbar-center hidden xl:flex">
+          <ul className="menu menu-horizontal ">{renderNavBarData}</ul>
         </div>
         <RightNavbar toggleVisible={toggleVisible} setValue={setValue} />
       </Navbar>
@@ -127,12 +134,6 @@ const RightNavbar: React.FC<RigthNavbarProps> = ({
 
   const isAuthenticated = () => (
     <>
-      <div>
-        <FaSearch
-          className="hover:fill-primary cursor-pointer"
-          onClick={toggleModal}
-        />
-      </div>
       <Dropdown>
         <Dropdown.Toggle>
           <Avatar
@@ -146,7 +147,7 @@ const RightNavbar: React.FC<RigthNavbarProps> = ({
           <Menu>
             {itemsMenuUser.map((item, i) => (
               <Menu.Item key={i}>
-                <a>
+                <a {...item}>
                   {item.icon}
                   {item.title}
                 </a>
@@ -155,36 +156,27 @@ const RightNavbar: React.FC<RigthNavbarProps> = ({
           </Menu>
         </Dropdown.Menu>
       </Dropdown>
-      <div className="flex-none">
-        <ShoppingCartNavBar />
-      </div>
-      <div className="">
-        <button
-          onClick={() => signOut()}
-          className="btn btn-sm btn-primary hidden text-white md:inline "
-        >
-          Cerrar Sesión
-        </button>
-      </div>
-      <RenderModal>
-        <SearchMobile />
-      </RenderModal>
     </>
   );
 
   return (
     <div className="navbar-end gap-2">
+      <div>
+        <FaSearch
+          className="hover:fill-primary cursor-pointer"
+          onClick={toggleModal}
+        />
+      </div>
       {session ? (
         isAuthenticated()
       ) : (
         <>
-          <ShoppingCartNavBar />
           <Button
             onClick={() => {
               toggleVisible();
               setValue(0);
             }}
-            className="text-white"
+            className="btn btn-sm  text-white hidden md:inline"
           >
             Iniciar Sesión
           </Button>
@@ -199,6 +191,12 @@ const RightNavbar: React.FC<RigthNavbarProps> = ({
           </Button>
         </>
       )}
+      <div className="flex-none">
+        <ShoppingCartNavBar />
+      </div>
+      <RenderModal>
+        <SearchMobile />
+      </RenderModal>
     </div>
   );
 };
@@ -251,7 +249,7 @@ const ShoppingCartNavBar = () => {
               <Card.Actions>
                 <Link href="/cart">
                   <a>
-                    <Button color="primary" fullWidth>
+                    <Button color="primary" fullWidth className="text-white">
                       Ver Carrito
                     </Button>
                   </a>

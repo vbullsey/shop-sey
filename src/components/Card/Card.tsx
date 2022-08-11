@@ -13,9 +13,18 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ product }) => {
   const { id, title = "", price = "", url = "" } = product;
-  const { addToCart } = useActions();
+  const { addToCart, createAlert } = useActions();
 
-  const handleAddToCart = () => addToCart(product);
+  const handleAddToCart = () => {
+    // notify();
+
+    addToCart(product);
+
+    createAlert({
+      message: `Se añadió ${title}`,
+      type: "success",
+    });
+  };
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm mx-auto">

@@ -13,3 +13,5 @@ export const totalQuantityItems = (cart: number) => {
 
   return totalCartItems;
 };
+
+export const stringOrEmpty = (message: string): string => message || "";

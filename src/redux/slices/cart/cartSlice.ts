@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 export type CartSlice = {
   id: string;
@@ -13,12 +14,20 @@ export const cartSlice = createSlice({
   initialState: [] as CartSlice[],
   reducers: {
     addToCart: (state, action) => {
-      const itemExists = state.find((item) => item.id === action.payload.id);
+      const itemExists = state.find(
+        (item: CartSlice) => item.id === action.payload.id
+      );
 
       if (!itemExists) {
         state.push({ ...action.payload, quantity: 1 });
+        toast.dark(`Se añadió: ${action.payload.title}`, {
+          position: "top-right",
+        });
       } else {
         itemExists.quantity++;
+        toast.dark(`${action.payload.title} (+1)`, {
+          position: "top-right",
+        });
       }
     },
     incrementQuantity: (state, action) => {

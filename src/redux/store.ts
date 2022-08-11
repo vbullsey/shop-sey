@@ -10,6 +10,7 @@ import {
 } from "@reduxjs/toolkit";
 import { Context, createWrapper, MakeStore } from "next-redux-wrapper";
 import logger from "redux-logger";
+import { alertSlice } from "./slices/alert";
 import { cartSlice } from "./slices/cart";
 import { counterSlice } from "./slices/counter";
 
@@ -30,6 +31,7 @@ const store = configureStore({
   reducer: combineReducers({
     counter: counterSlice.reducer,
     cart: cartSlice.reducer,
+    alert: alertSlice.reducer,
   }),
   middleware: [...getDefaultMiddleware(), logger],
   devTools: process.env.NODE_ENV !== `production`,

@@ -1,6 +1,5 @@
 import { useActions } from "@/redux/hooks";
 import Button from "@/ui/Actions/Button";
-import Select from "@/ui/Data input/Select";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 

@@ -1,3 +1,4 @@
+import { useActions } from "@/redux/hooks";
 import Button from "@/ui/Actions/Button";
 import Divider from "@/ui/Layout/Divider";
 import { signIn } from "next-auth/react";
@@ -58,6 +59,9 @@ type FormValues = {
 const LoginLayout = ({ closeModal }) => {
   const [loading, setLoading] = useState(false);
 
+  // Actions
+  const { createAlert } = useActions();
+
   const {
     register,
     handleSubmit,
@@ -76,11 +80,23 @@ const LoginLayout = ({ closeModal }) => {
 
     setLoading(false);
 
-    response?.status === 200 && closeModal();
+    if (response?.status === 200) {
+      closeModal();
+
+      createAlert({
+        message: "Bienvenido!",
+        type: "success",
+      });
+    }
 
     if (response?.error) {
       setError("username", { type: "custom", message: "Ingresa tú usuario" });
       setError("password", { type: "custom", message: "Ingresa tú password" });
+
+      createAlert({
+        message: "Something went wrong! 😩",
+        type: "error",
+      });
     }
   };
 
