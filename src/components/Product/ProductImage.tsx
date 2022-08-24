@@ -44,48 +44,13 @@ const ProductImage: React.FC<ProductProps> = ({ product }) => {
             <Image
               className="object-cover"
               quality={100}
-              src="/assets/products/default_image.png"
+              src={product.image}
               layout="fill"
               alt="NIKE AIR"
             />
           </div>
         )}
       </Slider>
-      {/* <div className="relative h-96">
-        <Image
-          src={product?.url ? product.url : "/akatsuki.png"}
-          alt="demo"
-          layout="fill"
-          className="transform duration-500 ease-in-out hover:scale-105"
-        />
-      </div>
-      <div className="relative flex border-t border-palette-lighter">
-        <button
-          aria-label="left-scroll"
-          className="h-32 bg-palette-lighter hover:bg-palette-light  absolute left-0 z-10 opacity-75"
-        >
-          <FaArrowLeft className="w-3 mx-1" />
-        </button>
-        <div
-          style={{ scrollBehavior: "smooth" }}
-          className="flex space-x-1 w-full overflow-auto border-t border-palette-lighter"
-        >
-          <button className="relative w-40 h-32 flex-shrink-0 rounded-sm ">
-            <Image
-              src={product?.url ? product.url : "/akatsuki.png"}
-              alt="demo"
-              layout="fill"
-              className=""
-            />
-          </button>
-        </div>
-        <button
-          aria-label="right-scroll"
-          className="h-32 bg-palette-lighter hover:bg-palette-light  absolute right-0 z-10 opacity-75"
-        >
-          <FaArrowRight className="w-3 mx-1 " />
-        </button>
-      </div> */}
     </div>
   );
 };

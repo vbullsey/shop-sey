@@ -3276,6 +3276,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-ultimate-pagination@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@types/react-ultimate-pagination/-/react-ultimate-pagination-1.2.1.tgz#bbce4fec92c00658c543f3dac0997ba156ec69cf"
+  integrity sha512-7aqYymAorTcZ+DVPUAT0Mjm1P7DsvDfvW7MPI1VVLjqmUASdjOsORZGKyd5yYtkQ2hEaYqe9ssRM0M3wUNOPvA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^18.0.9":
   version "18.0.14"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.14.tgz#e016616ffff51dba01b04945610fe3671fdbe06d"
@@ -11566,6 +11573,14 @@ react-toastify@^9.0.8:
   dependencies:
     clsx "^1.1.1"
 
+react-ultimate-pagination@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-ultimate-pagination/-/react-ultimate-pagination-1.3.0.tgz#feb4d9518e52b3915c863d4305a1190b66befdbd"
+  integrity sha512-Nvf+PjncTqBW/wHgO4FM3EX7VzrUf13CnpElREUgZloG2BiEQkGseDS2r5p3h/TIvLfLb602IeaihQFJbUSt0A==
+  dependencies:
+    prop-types "^15.0.0"
+    ultimate-pagination "1.0.0"
+
 react@^18.1.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
@@ -12894,6 +12909,11 @@ svgo@^2.7.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
+swr@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-1.3.0.tgz#c6531866a35b4db37b38b72c45a63171faf9f4e8"
+  integrity sha512-dkghQrOl2ORX9HYrMDtPa7LTVHJjCTeZoB1dqTbnnEDlSvN8JEKpYIYurDfvbQFUUS8Cg8PceFVZNkW0KNNYPw==
+
 symbol-tree@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
@@ -13323,6 +13343,11 @@ uglify-js@^3.1.4:
   version "3.16.1"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.16.1.tgz#0e7ec928b3d0b1e1d952bce634c384fd56377317"
   integrity sha512-X5BGTIDH8U6IQ1TIRP62YC36k+ULAa1d59BxlWvPUJ1NkW5L3FwcGfEzuVvGmhJFBu0YJ5Ge25tmRISqCmLiRQ==
+
+ultimate-pagination@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ultimate-pagination/-/ultimate-pagination-1.0.0.tgz#1f9f5465678d7410159d5a172c2013465e9bd85f"
+  integrity sha512-bJNroO5GM11McB9RJ1rHZGiXV/jU89Qwc6U5wR8jZuk0uFVajIvUDGPiROVvNMApvh7Ij3cPoeG5V3UlF4GvOA==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"

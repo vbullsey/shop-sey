@@ -7,19 +7,14 @@ import {
   Store,
   ThunkAction,
   ThunkDispatch,
-} from "@reduxjs/toolkit";
-import { Context, createWrapper, MakeStore } from "next-redux-wrapper";
-import logger from "redux-logger";
-import { alertSlice } from "./slices/alert";
-import { cartSlice } from "./slices/cart";
-import { counterSlice } from "./slices/counter";
+} from '@reduxjs/toolkit';
+import { Context, createWrapper, MakeStore } from 'next-redux-wrapper';
+import logger from 'redux-logger';
+import { alertSlice } from './slices/alert';
+import { cartSlice } from './slices/cart';
+import { counterSlice } from './slices/counter';
 
-export type ThunkActionType<T = Promise<void>> = ThunkAction<
-  T,
-  RootState,
-  null,
-  Action<string>
->;
+export type ThunkActionType<T = Promise<void>> = ThunkAction<T, RootState, null, Action<string>>;
 export type ThunkDispatchType = ThunkDispatch<RootState, any, Action<string>>;
 export type StoreType = Store<RootState, Action<string>> & {
   dispatch: ThunkDispatchType;
@@ -33,12 +28,11 @@ const store = configureStore({
     cart: cartSlice.reducer,
     alert: alertSlice.reducer,
   }),
-  middleware: [...getDefaultMiddleware(), logger],
+  middleware: [...getDefaultMiddleware()],
   devTools: process.env.NODE_ENV !== `production`,
 });
 // @ts-ignore
-const makeStore: MakeStore<RootState> = (context: Context): EnhancedStore =>
-  store;
+const makeStore: MakeStore<RootState> = (context: Context): EnhancedStore => store;
 
 // @ts-ignore
 export const wrapper = createWrapper(makeStore, {

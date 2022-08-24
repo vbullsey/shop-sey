@@ -1,5 +1,6 @@
 import { useActions } from "@/redux/hooks";
 import Rating from "@/ui/Data input/Rating";
+import Image from "next/image";
 import Link from "next/link";
 
 type CardProps = {
@@ -7,12 +8,12 @@ type CardProps = {
     id: string;
     title: string;
     price: string;
-    url: string;
+    image: string;
   };
 };
 
 const Card: React.FC<CardProps> = ({ product }) => {
-  const { id, title = "", price = "", url = "" } = product;
+  const { id, title = "", price = "", image = "" } = product;
   const { addToCart, createAlert } = useActions();
 
   const handleAddToCart = () => {
@@ -28,12 +29,15 @@ const Card: React.FC<CardProps> = ({ product }) => {
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm mx-auto">
-      <img
-        className="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md object-cover"
-        src={url}
-      />
+      <div className="relative h-64 w-full">
+        <Image
+          className="bg-gray-300 bg-center bg-cover rounded-lg shadow-md object-cover"
+          src={image}
+          layout="fill"
+        />
+      </div>
 
-      <div className="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 ">
+      <div className="w-56  -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 ">
         <Link href={`products/${id}`}>
           <a>
             <h3 className="font-bold tracking-wide text-center text-gray-800 uppercase ">
@@ -56,12 +60,12 @@ const Card: React.FC<CardProps> = ({ product }) => {
           </Rating>
         </div>
 
-        <div className="flex items-center justify-between px-3 py-2 bg-gray-200 dark:bg-gray-700">
+        <div className="flex items-center justify-between px-1 py-2 bg-gray-200 dark:bg-gray-700">
           <span className="font-bold text-gray-800 dark:text-gray-200">
             ${price}
           </span>
           <button
-            className="btn btn-xs btn-primary md:btn-sm gap-2 text-white"
+            className="btn btn-xs btn-primary md:btn-xs gap-2 text-white"
             onClick={handleAddToCart}
           >
             Añadir al carro

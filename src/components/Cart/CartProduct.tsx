@@ -1,8 +1,9 @@
-import { useActions } from "@/redux/hooks";
-import Button from "@/ui/Actions/Button";
-import ButtonGroup from "@/ui/Layout/ButtonGroup";
-import Image from "next/image";
-import { useState } from "react";
+import { useActions } from '@/redux/hooks';
+import Button from '@/ui/Actions/Button';
+import ButtonGroup from '@/ui/Layout/ButtonGroup';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
 const CartProduct = ({ product }) => {
   const { removeFromCart } = useActions();
@@ -10,21 +11,25 @@ const CartProduct = ({ product }) => {
   return (
     <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
       <div className="flex w-full space-x-2 sm:space-x-4">
-        <div className="relative w-20 h-20 sm:w-32 sm:h-32">
-          <Image
-            className="flex-shrink-0 object-cover"
-            src={product.url}
-            alt={product.title}
-            layout="fill"
-          />
+        <div className="relative w-20 h-20 sm:w-32 sm:h-32 cursor-pointer">
+          <Link href={`/products/${product.id}`}>
+            <Image
+              className="flex-shrink-0 object-cover"
+              src={product.image}
+              alt={product.title}
+              layout="fill"
+            />
+          </Link>
         </div>
 
         <div className="flex flex-col justify-between w-full pb-4">
           <div className="flex justify-between w-full pb-2 space-x-2">
             <div className="space-y-1">
-              <h3 className="text-lg font-semibold leading-snug sm:pr-8">
-                {product.title}
-              </h3>
+              <Link href={`/products/${product.id}`}>
+                <h3 className="text-lg font-semibold leading-snug sm:pr-8 hover:text-primary cursor-pointer">
+                  {product.title}
+                </h3>
+              </Link>
               <p className="text-sm dark:text-gray-400">Figura</p>
             </div>
             <div className="text-right">
@@ -85,7 +90,7 @@ const CartProduct = ({ product }) => {
 export default CartProduct;
 
 export const ManageQuantity = ({ product }) => {
-  const { quantity } = product;
+  const { quantity = 1 } = product;
 
   const { decrementQuantity, incrementQuantity } = useActions();
 
@@ -96,7 +101,7 @@ export const ManageQuantity = ({ product }) => {
           type="button"
           data-action="decrement"
           className=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
-          onClick={() => decrementQuantity(product.id)}
+          onClick={() => decrementQuantity(product)}
         >
           <span className="m-auto text-2xl font-thin">-</span>
         </button>
@@ -105,11 +110,12 @@ export const ManageQuantity = ({ product }) => {
           className="outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  "
           name="custom-input-number"
           value={quantity}
+          defaultValue={1}
         />
         <button
           data-action="increment"
           className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
-          onClick={() => incrementQuantity(product.id)}
+          onClick={() => incrementQuantity(product)}
         >
           <span className="m-auto text-2xl font-thin">+</span>
         </button>

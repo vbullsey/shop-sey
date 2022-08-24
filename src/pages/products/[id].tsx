@@ -1,5 +1,4 @@
 import ProductSection from "@/components/Product/ProductSection";
-import MainLayout from "@/layout/MainLayout";
 
 export type ProductInfoProps = {
   title: string;
@@ -15,25 +14,23 @@ export type ProductProps = {
   categories?: any;
 };
 
-const ProductBySlug: React.FC<ProductProps> = ({ categories, product }) => {
+const ProductBySlug: React.FC<ProductProps> = ({ product }) => {
   return (
-    <MainLayout navBarData={categories}>
-      <div className="min-h-screen py-12 sm:pt-36">
-        {product && <ProductSection product={product} />}
-      </div>
-    </MainLayout>
+    <div className="min-h-screen py-12 sm:pt-36">
+      {product && <ProductSection product={product} />}
+    </div>
   );
 };
 
 export async function getStaticPaths() {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/products`
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product`);
 
     const data = await res.json();
 
-    const paths = data.map(({ id }: any) => ({ params: { id: `${id}` } }));
+    const paths = data.products.map(({ id }: any) => ({
+      params: { id: `${id}` },
+    }));
 
     return {
       fallback: false,
@@ -41,26 +38,21 @@ export async function getStaticPaths() {
     };
   } catch (e) {
     console.log(e);
+
+    return null;
   }
 }
 
 export async function getStaticProps({ params }: any) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/product/${params.id}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/product/${params.id}`
   );
-
-  const categoriesResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/config/categories`
-  );
-
-  const categories = await categoriesResponse.json();
 
   const product = await res.json();
 
   return {
     props: {
       product,
-      categories,
     },
   };
 }

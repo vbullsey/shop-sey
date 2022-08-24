@@ -52,23 +52,22 @@ export const itemsMenuUser = [
   },
 ];
 
-const NavBar = ({ navBarData }) => {
+const NavBar = ({ categories }) => {
   const { RenderModal, toggleVisible, closeModal } = useModal();
 
   const [value, setValue] = useState<number>(0);
 
   const renderNavBarData = (
     <>
-      {navBarData &&
-        navBarData.map((item, i) => {
-          return (
-            <li key={i}>
-              <Link href={`/products${item.url}`}>
-                <a className="uppercase text-sm">{item.title}</a>
-              </Link>
-            </li>
-          );
-        })}
+      {categories.map((item, i) => {
+        return (
+          <li key={i}>
+            <Link href={`${item.url}`}>
+              <a className="uppercase text-sm">{item.title}</a>
+            </Link>
+          </li>
+        );
+      })}
     </>
   );
 
@@ -134,7 +133,7 @@ const RightNavbar: React.FC<RigthNavbarProps> = ({
 
   const isAuthenticated = () => (
     <>
-      <Dropdown>
+      <Dropdown horizontal="center" vertical="end">
         <Dropdown.Toggle>
           <Avatar
             className="uppercase "

@@ -1,7 +1,10 @@
-import HomeSection from "@/components/Home/HomeSection";
-import MainLayout from "@/layout/MainLayout";
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
+import { SWRConfig } from "swr";
+
+import IndexLayout from "@/layout/IndexLayout";
+
+import { FALLBACK_CATEGORIES, FALLBACK_PRODUCTS } from "@/constants/fallback";
 
 export type ProductInfoProps = {
   title: string;
@@ -10,42 +13,48 @@ export type ProductInfoProps = {
   images: string;
 };
 
-export type ProductProps = {
-  products: ProductInfoProps[];
+export type CategoriesProps = {
+  id: string;
+  title: string;
+  url: string;
 };
 
-const Index: React.FC<ProductProps> = ({ categories, products }) => {
+export type IndexProps = {
+  products: ProductInfoProps[];
+  categories: CategoriesProps[];
+  fallback: any;
+};
+
+const Index: React.FC<IndexProps> = (props) => {
+  const { fallback } = props;
+
   return (
-    <MainLayout navBarData={categories}>
-      <div className="mx-4">
-        <div className="flex justify-center ml-2 flex-col">
-          <section className="py-6 sm:py-12 dark:bg-gray-800 dark:text-gray-100">
-            <HomeSection products={products} />
-          </section>
-        </div>
-      </div>
-    </MainLayout>
+    <SWRConfig value={{ fallback }}>
+      <IndexLayout />
+    </SWRConfig>
   );
 };
 
 export async function getServerSideProps(context: NextPageContext) {
   try {
     const session = await getSession(context);
+
     const productResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/products`
-    );
-    const categoriesResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/config/categories`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/product`
     );
 
     const products = await productResponse.json();
-    const categories = await categoriesResponse.json();
     return {
-      props: { session, categories, products },
+      props: {
+        fallback: {
+          [FALLBACK_PRODUCTS]: products,
+        },
+        session,
+      },
     };
   } catch (e) {
     return {
-      props: { products: [] },
+      props: { products: [], categories: [] },
     };
   }
 }

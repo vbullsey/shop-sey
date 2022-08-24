@@ -3,12 +3,12 @@ import React from "react";
 
 const carouselImages = [
   {
-    src: "/akatsuki.png",
-    alt: "banner_akatsuki",
+    src: "/banner_1.jpeg",
+    alt: "banner_one_piece",
   },
   {
-    src: "/one_piece.jpg",
-    alt: "banner_one_piece",
+    src: "/banner.jpeg",
+    alt: "banner",
   },
   {
     src: "/banner1.webp",

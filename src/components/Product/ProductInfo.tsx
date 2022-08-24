@@ -7,7 +7,7 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
       <h1 className="flex justify-center leading-relaxed text-white font-extrabold text-3xl py-2 sm:py-4 md:justify-start">
         {product.title}
       </h1>
-      <div className="flex justify-center md:justify-start">
+      <div className="flex justify-center md:justify-start mb-4">
         <Rating>
           {[...Array.from(Array(5).keys())].map((num, i) => (
             <Rating.Item

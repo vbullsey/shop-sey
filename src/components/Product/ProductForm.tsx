@@ -1,7 +1,7 @@
-import { useActions } from "@/redux/hooks";
-import Button from "@/ui/Actions/Button";
-import { useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import { useActions } from '@/redux/hooks';
+import Button from '@/ui/Actions/Button';
+import { useState } from 'react';
+import { FaShoppingCart } from 'react-icons/fa';
 
 function ProductForm({ product }) {
   const [quantity, setQuantity] = useState<number>(1);
